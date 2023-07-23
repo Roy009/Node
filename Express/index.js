@@ -15,18 +15,27 @@ server.get('/', (req,res) => {
     // res.sendFile('C:\\Users\\ROHIT ROY\\OneDrive\\Desktop\\Node\\Express\\index.html');
     res.json({type: 'GET'})
 })
-server.post('/',(req,res) => {
-    res.json({type: 'POST'})
-})
-server.put('/',(req,res) => {
-    res.json({type: 'PUT'})
-})
-server.delete('/',(req,res) => {
-    res.json({type: 'DELETE'})
-})
-server.patch('/',(req,res) => {
-    res.json({type: 'PATCH'})
-})
+// server.post('/',(req,res) => {
+//     res.json({type: 'POST'})
+// })
+// server.put('/',(req,res) => {
+//     res.json({type: 'PUT'})
+// })
+// server.delete('/',(req,res) => {
+//     res.json({type: 'DELETE'})
+// })
+// server.patch('/',(req,res) => {
+//     res.json({type: 'PATCH'})
+// })
+const auth = (req,res,next) => {
+    console.log(req.query);
+    if(req.query.password === '123'){
+        next()
+    }else{
+        res.sendStatus(401);
+    }
+}
+server.use(auth)
 server.listen(8080, () => {
     console.log("Server Started");
 });
