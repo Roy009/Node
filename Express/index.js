@@ -1,9 +1,12 @@
 const fs = require('fs')
 const express = require('express')
 const server = express();
+const morgan = require('morgan')
 const data = fs.readFileSync('data.json');
 
 //MIDDLEWARE
+server.use(morgan('dev'))
+server.use(express.static('public'))
 server.use(express.json())
 server.use((req,res,next) => {
     console.log(req.method, req.ip, req.hostname, req.get('User-Agent'));
